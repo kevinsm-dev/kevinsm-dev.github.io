@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kevin S.M. | Fullstack Developer</title>
+    <!-- Import Font dari Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Reset & Variables */
+        :root {
+            --bg-dark: #0a0a0a;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-primary: #e0e0e0;
+            --text-secondary: #888888;
+            --accent-color: #00ffcc; /* Cyan Hacker Vibe */
+            --font-main: 'Inter', sans-serif;
+            --font-code: 'Fira Code', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            overflow-x: hidden;
+            /* Efek Background Grid Halus */
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .profile-container {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .profile-pic {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--glass-border);
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.2);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s;
+        }
+
+        /* Animasi Glow saat di-hover */
+        .profile-pic:hover {
+            transform: scale(1.08) rotate(3deg);
+            box-shadow: 0 0 50px rgba(0, 255, 204, 0.5);
+            border-color: var(--accent-color);
+        }
+
+        /* Efek Terminal Typing */
+        .typing-container {
+            font-family: var(--font-code);
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .typing-text {
+            border-right: 3px solid var(--accent-color);
+            white-space: nowrap;
+            overflow: hidden;
+            padding-right: 5px;
+            animation: blink 0.75s step-end infinite;
+        }
+
+        @keyframes blink { 50% { border-color: transparent; } }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 20px auto;
+            line-height: 1.6;
+        }
+
+        .highlight { color: var(--accent-color); }
+
+        /* --- PROJECTS SECTION (GLASSMORPHISM) --- */
+        .projects-section {
+            padding: 80px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: var(--font-code);
+            font-size: 2rem;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        .section-title::before { content: "< "; color: var(--text-secondary); }
+        .section-title::after { content: " />"; color: var(--text-secondary); }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        /* Card Style - Glassmorphism */
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animasi Card Hover */
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.1);
+        }
+
+        /* Gambar Proyek dalam Card */
+        .card-image-wrapper {
+            width: 100%;
+            height: 180px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-image {
+            transform: scale(1.1); /* Zoom in halus saat card di-hover */
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        /* Tags Teknologi */
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 25px;
+        }
+
+        .tech-tags span {
+            font-family: var(--font-code);
+            font-size: 0.75rem;
+            color: var(--accent-color);
+            background: rgba(0, 255, 204, 0.05);
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 255, 204, 0.2);
+        }
+
+        /* Tombol Link Keren */
+        .btn-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--bg-dark);
+            background: var(--accent-color);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-link:hover {
+            background: #fff;
+            box-shadow: 0 0 15px var(--accent-color);
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .typing-container { font-size: 1.8rem; }
+            .profile-pic { width: 140px; height: 140px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION (TAMPILAN AWAL) -->
+    <section class="hero">
+        <div class="profile-container">
+            <img src="foto-profil.jpg" alt="Kevin S.M." class="profile-pic" loading="lazy">
+        </div>
+        
+        <div class="typing-container">
+            <span class="highlight">~ </span>
+            <span class="typing-text" id="typewriter"></span>
+        </div>
+        
+        <p class="subtitle">
+            Halo, saya <span class="highlight">Kevin Setyo Mukhlis</span>. Siswa X TKJ 2 di SMK Islamiyah Ciputat yang berfokus pada pengembangan sistem web aplikatif, manajemen database, dan eksplorasi mikrokontroler.
+        </p>
+    </section>
+
+    <!-- PROJECTS SECTION (GALERI KARYA) -->
+    <section class="projects-section">
+        <h2 class="section-title">Featured_Projects</h2>
+        
+        <div class="project-grid">
+
+            <!-- PROJECT 1: ABSENSI -->
+            <div class="card">
+                <div class="card-image-wrapper">
+                    <img src="foto-absen.jpg" alt="Sistem Absensi" class="card-image" loading="lazy">
+                </div>
+                <h3>Sistem Absensi Digital</h3>
+                <p>Aplikasi web untuk rekapitulasi kehadiran kelas secara otomatis. Mencegah manipulasi data dan mempermudah pemantauan.</p>
+                <div class="tech-tags">
+                    <span>HTML5</span>
+                    <span>CSS3</span>
+                    <span>JavaScript</span>
+                    <span>Database</span>
+                </div>
+                <a href="https://bit.ly/Absensikelas10tkj2" target="_blank" class="btn-link">
+                    Live Demo <span>↗</span>
+                </a>
+            </div>
+
+            <!-- PROJECT 2: JAHITKU -->
+            <div class="card">
+                <div class="card-image-wrapper">
+                    <img src="foto-jahit.jpg" alt="JahitKu App" class="card-image" loading="lazy">
+                </div>
+                <h3>JahitKu Management App</h3>
+                <p>Platform digital untuk manajemen order bisnis jahit. Fitur unggulan: tracking status pesanan agar operasional lebih simpel.</p>
+                <div class="tech-tags">
+                    <span>Web App</span>
+                    <span>UI/UX</span>
+                    <span>Netlify Deploy</span>
+                </div>
+                <a href="https://dijahitajalebihsimpel.netlify.app" target="_blank" class="btn-link">
+                    Live Demo <span>↗</span>
+                </a>
+            </div>
+
+            <!-- PROJECT 3: WEB ULTAH (FREELANCE PROJECT) -->
+            <div class="card">
+                <div class="card-image-wrapper">
+                    <img src="foto-ultah.jpg" alt="Freelance Web Ultah" class="card-image" loading="lazy">
+                </div>
+                <h3>Client Project: Web Gift</h3>
+                <p>Proyek <i>freelance</i> pembuatan website interaktif pesanan klien. Dilengkapi keamanan <i>password</i>, <i>background music</i>, dan UI/UX animasi <i>custom</i> sesuai <i>request</i>.</p>
+                <div class="tech-tags">
+                    <span>Freelance Gig</span>
+                    <span>JS Animations</span>
+                    <span>Vercel Deploy</span>
+                </div>
+                <a href="https://specialgiftforyou-three.vercel.app/" target="_blank" class="btn-link">
+                    Live Demo <span>↗</span>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SCRIPT JAVASCRIPT UNTUK ANIMASI TYPING -->
+    <script>
+        const texts = [
+            "Hi, I'm Kevin S.M.", 
+            "I build Web Apps.", 
+            "I study Networking."
+        ];
+        let count = 0;
+        let index = 0;
+        let currentText = "";
+        let letter = "";
+        let isDeleting = false;
+        
+        function type() {
+            if (count === texts.length) { count = 0; }
+            currentText = texts[count];
+            
+            if (isDeleting) {
+                letter = currentText.slice(0, --index);
+            } else {
+                letter = currentText.slice(0, ++index);
+            }
+            
+            document.getElementById('typewriter').textContent = letter;
+            
+            let typeSpeed = isDeleting ? 50 : 100;
+            
+            if (!isDeleting && letter.length === currentText.length) {
+                typeSpeed = 2000; // Pause at the end
+                isDeleting = true;
+            } else if (isDeleting && letter.length === 0) {
+                isDeleting = false;
+                count++;
+                typeSpeed = 500; // Pause before new word
+            }
+            
+            setTimeout(type, typeSpeed);
+        }
+        
+        // Mulai animasi saat halaman dimuat
+        window.onload = () => {
+            setTimeout(type, 1000);
+        };
+    </script>
+</body>
+</html>
